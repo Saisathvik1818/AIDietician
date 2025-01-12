@@ -1,0 +1,307 @@
+
+
+{% load static %}
+
+{% static "assets/images" as baseUrl %}
+
+
+{% block content %}
+
+<head>
+<script type="text/javascript">
+function scroll_to_bottom(){
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+<style> 
+
+    .container2 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item {
+      width: 30%; /* Display 4 items per row */
+      box-sizing: border-box; /* Include padding and border in the width */
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+      margin: 5px;
+    }
+
+body {
+  margin: 0;
+ 
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid green;
+}
+</style>
+</head>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+    margin: 0;
+    padding: 0 20px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+	 font-family: Bahnschrift, "Bahnschrift", Bahnschrift;
+}
+
+.container {
+    border: 2px solid #dedede;
+    background-color: #fedadb;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #bcfebe;
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+</style>
+</head>
+
+<style>
+</style>
+
+<body onload="scroll_to_bottom()">
+
+<br><br><br>
+<!-- <table >
+<tr><td > -->
+{% for d in data %}
+<div class="container">
+
+  <p class="time-right"><b><font size="" color="blue">{{d.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></b></p>
+  <p class="time-left">{{d.message|linebreaks}}
+  </p>
+</div>
+{% endfor %}
+
+
+{% if 'list' == staz %}
+
+<div class="container"> 
+<h4>Suggested Breakfast</h6>
+  <div class="container2">
+
+{% for d in bf%}
+
+ <div class="item"> <img src="{{baseUrl}}/{{d}}.jpg" WIDTH="180" height="150" alt="" /> {{d}}</div>
+
+{% endfor %}
+ </div>
+
+
+<h4>Suggested Lunch</h6>
+  <div class="container2">
+
+{% for d in lunch%}
+
+ <div class="item"> <img src="{{baseUrl}}/{{d}}.jpg" WIDTH="180" height="150" alt="" /> {{d}}</div>
+
+{% endfor %}
+ </div>
+
+
+
+<h4>Suggested Dinner</h6>
+  <div class="container2">
+
+{% for d in dinner%}
+
+ <div class="item"> <img src="{{baseUrl}}/{{d}}.jpg" WIDTH="180" height="150" alt="" /> {{d}}</div>
+
+{% endfor %}
+ </div>
+
+
+{% endif %}
+
+
+
+<!-- ----------------------------------------------------------------------------- -->
+
+
+<!-- ----------------------------------------------------------------------------- -->
+{% if 'diet' == stz %}
+
+<div class="container"> 
+<h5>Please Fill the details</h6>
+	<form method="post" action="/dietprediction/">
+	{%  csrf_token  %}
+		 <p>
+		 <table  width="50%">
+	<tr>
+		<td>Age</td>
+		<td><input type="number" required name="age"></td>
+	<tr>
+		<td>Weight(KG)</td>
+		<td><input type="number" required name="w"></td>
+	<tr>
+		<td>Height(CM)</td>
+		<td><input type="number" required name="h"></td>
+	<tr>
+		<td>Gender</td>
+		<td><select name="gen">
+			<option value="1" selected>Male
+			<option value="0">Female
+		</select>
+	<tr>
+		<td>BMI</td>
+		<td><input type="number" required name="bmi"></td>
+
+	<tr>
+		<td>BMR</td>
+		<td><input type="number" required name="bmr"></td>
+<tr><td><td><input type="submit" name="Submit">
+
+</table>
+ </p>
+	</form>
+</div>
+
+{% endif %}
+
+
+<!-- ----------------------------------------------------------------------------- -->
+
+{% if 'cal' == stz %}
+
+<div class="container"> 
+<h5>Please enter food name</h6>
+	<form method="post" action="/getcal/">
+	{%  csrf_token  %}
+		 <p>
+		 <table  width="50%">
+	<tr>
+		<td><input type="text" required name="name"  onfocus placeholder="Enter Food name " size=50></td>
+<tr><td><input type="submit" name="Get" >
+
+</table>
+ </p>
+	</form>
+</div>
+{% endif %}
+
+
+
+
+<!-- ----------------------------------------------------------------------------- -->
+{% if 'bmi' == stz %}
+
+<div class="container"> 
+<h5>Please Fill the details</h6>
+	<form method="post" action="/checkbmi/">
+	{%  csrf_token  %}
+		 <p>
+		 <table  width="50%">
+	<tr>
+		<td>Weight(KG)</td>
+		<td><input type="text" required name="w"></td>
+	<tr>
+		<td>Height(CM)</td>
+		<td><input type="text" required name="h"></td>
+	<tr><td><td><input type="submit" name="Submit">
+
+</table>
+ </p>
+	</form>
+</div>
+
+{% endif %}
+
+<!-- ----------------------------------------------------------------------------- -->
+
+<!-- ----------------------------------------------------------------------------- -->
+{% if 'bmr' == stz %}
+
+<div class="container"> 
+<h5>Please Fill the details</h6>
+	<form method="post" action="/checkbmr/">
+	{%  csrf_token  %}
+		 <p>
+		 <table  width="50%">
+	<tr>
+		<td>Age</td>
+		<td><input type="text" required name="age"></td>
+	<tr>
+		<td>Weight(KG)</td>
+		<td><input type="text" required name="w"></td>
+	<tr>
+		<td>Height(CM)</td>
+		<td><input type="text" required name="h"></td>
+		<tr>
+		<td>Gender</td>
+		<td><select name="gen">
+			<option value="M" selected>Male
+			<option value="F">Female
+		</select>
+	
+	<tr><td><td><input type="submit" name="Submit">
+
+</table>
+ </p>
+	</form>
+</div>
+
+{% endif %}
+
+<!-- ----------------------------------------------------------------------------- -->
+
+{% if 'main' == staz %}
+
+<div class="container"> 
+<p class="time-right"><b><font size="" color="blue">Chatbot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></b></p>
+<a href="/dietprediction"><b>Diet plan prediction</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+<a href="/getcal">Get Calorie of a food</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+    <a href="/checkbmi"><b>Check BMI</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+        <a href="/checkbmr"><b>Check BMR</a> 
+    
+ 
+</div>
+
+{% endif %}
+
+
+
+
+
+
+					<form method="post" action="/chataction/">
+				
+						<input  type="hidden" name="message"  autofocus  value="{{msg}}">
+					</form>
+<!-- </table> -->
+
+
+
+
+</body>
+</html>
+<br><br><br>
+
+
+{% endblock %}
+
+
+

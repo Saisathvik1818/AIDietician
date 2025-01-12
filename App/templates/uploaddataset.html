@@ -1,0 +1,27 @@
+
+{% extends 'adminbase.html' %}
+{% block content %}
+
+
+
+<center>
+<font size="+1" color="red">{{msg}}
+<br>
+<font size="" color=""><h2>Upload Dataset of Food and Calories </h2></font>
+<br><br>
+
+<form method="post" action="/uploaddatasetaction/">
+	{% csrf_token %} 
+	<table id="tab" width="50%">
+	<tr><td>	
+	<input type="file" name="">
+		<br><input type="submit" value="Upload" ></td>
+	</tr>
+	</table>
+</form>
+<br><br><br>
+
+<br><br><br><br><br>	
+
+
+{% endblock %}
