@@ -90,8 +90,8 @@ The final system integrates the best-performing model to enhance prediction accu
 
 If you have questions or feedback, feel free to reach out:
 
-- **Author**: [Your Name]
-- **GitHub**: [Your GitHub Profile]
+- **Author**: KADIYALA SAI SATHVIK
+- **GitHub**: Saisathvik1818
 
 ---
 **AI Dietician Bot** demonstrates the power of machine learning in healthcare, transforming diet planning into an automated, intelligent process for healthier living.
